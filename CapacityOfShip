@@ -1,0 +1,35 @@
+class Solution {
+   bool isCapacity(vector<int>& weights, int days , int d){
+       int n = weights.size();
+       int reqDays = 1;
+        int tempWeight = 0;
+       for(int i = 0 ; i < n ; i++){
+           if(weights[i] + tempWeight <= d){
+               tempWeight += weights[i];
+           }else{
+               reqDays++;
+               tempWeight = weights[i];
+           }
+       }
+
+        return reqDays <= days;
+
+   }
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+      int lo = *max_element(weights.begin(),weights.end());
+      int hi = 0;
+      for(int i = 0 ; i < weights.size() ; i++){
+          hi += weights[i];
+      }  
+
+     while(lo <= hi){
+         int mid = lo + (hi - lo)/2;
+         if(isCapacity(weights,days,mid)) hi = mid - 1;
+         else lo = mid + 1;
+     }
+
+     return lo;
+
+    }
+};
