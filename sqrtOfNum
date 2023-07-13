@@ -1,0 +1,23 @@
+// sqrt of a num in O(logn)
+
+int floorSqrt(int n)
+{   
+    
+    int lo = 1 , hi = n;
+    int ans = -1;
+    while(lo <= hi){
+        int mid = lo + ( hi - lo)/2;
+        long long val = mid  * mid;
+
+        if(val <= n){
+            ans = mid;
+            lo = mid + 1;
+        }else{
+            hi = mid - 1;
+        }
+    }
+
+    return ans;
+    
+
+}
